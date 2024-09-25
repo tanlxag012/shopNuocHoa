@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/assets/style/style.css">
+    <link rel="stylesheet" href="/public/assets/fonts/themify-icons/themify-icons.css">
+    <link rel="icon" href="/public/assets/img/perfume.png" type="image/x-icon">
+    <title>Đăng nhập</title>
+</head>
+<body>
+<div>
+    <img src="/public/assets/img/Login-background.jpg" alt="" class="background">
+    <!-- Thanh header -->
+    <div class="header">
+        <div class="header-slogan">
+            <h1 class="first-slogan">
+                Cái Shop Nước Hoa
+            </h1>
+            <h1 class="second-slogan">
+                Bạn Thích Tôi Mới Bán
+            </h1>
+        </div>
+
+        <div class="header-icon">
+            <div class="face-icon">
+                <a href="https://www.facebook.com/quangthinh2803/"><i class="ti-facebook"></i></a>
+            </div>
+            <div class="insta-icon">
+                <a href="#"><i class="ti-instagram"></i></a>
+            </div>
+            <div class="google-icon">
+                <a href="#"><i class="ti-google"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+        <div class="main-intro">
+            <div class="main-logo">
+                <div class="logo">
+                    <img src="/public/assets/img/logo2.jpg" alt="Perfume">
+                </div>
+                <div class="name">
+                    <h1>PPERFUME</h1>
+                </div>
+            </div>
+            <div class="main-text">
+                <h3>Nền tảng buôn bán <div style="color: rgb(203, 87, 106); display: inline-block;">NƯỚC HOA</div></h3>
+                <h4>Uy tín-Chất lượng-Hợp pháp</h4>
+            </div>
+        </div>
+
+        <div class="main-login">
+            <div class="login-header">
+                <h2>Đăng nhập</h2>
+            </div>
+             <form class="login-form" action="/api/auth/signin" method="post">
+                <div class="form-input">
+                     <input class="input-email" name="username"  placeholder="Email" required>
+                     <input class="input-password" name="password" type="password" placeholder="Password" required>
+                </div>
+                 <p style="color:blue;" th:text="${message}"></p>
+                <button class="submit" type="submit">ĐĂNG NHẬP</button>
+            </form>
+
+            <div class="login-footer">
+                <p>Bạn là người mới? <a href="/api/auth/signup">Đăng ký</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sale -->
+    <div class="sale">
+        <div class="sale-intro">
+            <div class="intro-header">
+                <h3>Nước hoa cho phái đẹp</h3>
+                <br>
+                <h3>---<i class="ti-star"></i>---</h3>
+            </div>
+            <div class="intro-main">
+                <h1>NƯỚC HOA BỐN MÙA</h1>
+            </div>
+            <div class="intro-footer">
+                <h4>Chỉ từ 200.000Đ</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products -->
+    <div class="products">
+        <div class="products-intro">
+            <div class="intro">
+                <div class="intro-line"></div>
+                <h1 class="intro-header">SẢN PHẨM MỚI</h1>
+                <div class="intro-line"></div>
+            </div>
+            <div class="intro-description">
+                <p>Các mẫu sản phẩm mới nhất trong
+                <br>
+                bộ sưu tập thu - đông năm nay</p>
+            </div>
+        </div>
+
+        <div class="products-img">
+            <div class="products-1">
+                <a href="#"><img src="/public/assets/img/Nuochoa1.png" alt=""></a>
+            </div>
+            <div class="products-2">
+                <a href="#"><img src="/public/assets/img/Nuochoa2.png" alt=""></a>
+            </div>
+            <div class="products-34">
+                <a href="#"><img src="/public/assets/img/Nuochoa3.png" alt=""></a>
+                <a href="#"><img src="/public/assets/img/Nuochoa4.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vote -->
+    <div class="vote">
+        <div class="vote-background">
+            <div class="vote-person">
+                <img src="/public/assets/img/Timcook.jpg" alt="Timcook">
+            </div>
+    
+            <div class="vote-comment">
+                <p>
+                    Tôi thực sự hài lòng về trải nghiệm
+                    sản phẩm mà shop mang lại. 
+                    Chất lượng sản phẩm hoàn hảo, 
+                    dịch vụ chăm sóc khách hàng tận tâm. 
+                    Giá cả sản phẩm hợp lý. 
+                    Tôi sẽ ủng hộ công ty thường xuyên
+                    vào thời gian tới.
+                </p>
+            </div>
+    
+            <div class="vote-personInfor">
+                <div class="name">
+                    <h3>TIM COOK</h3>
+                </div>
+                <div class="job">
+                    <p>CEO - Apple</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trademark -->
+    <div class="trademark">
+        <img src="/public/assets/img/Trademark1.jpg" alt="Trademark1">
+        <img src="/public/assets/img/Trademark2.jpg" alt="Trademark2">
+        <img src="/public/assets/img/Trademark3.jpg" alt="Trademark3">
+        <img src="/public/assets/img/Trademark4.jpg" alt="Trademark4">
+        <img src="/public/assets/img/Trademark5.png" alt="Trademark5">
+        <img src="/public/assets/img/Trademark6.png" alt="Trademark6">
+    </div>
+
+    <!-- Help -->
+    <div class="help">
+        <div>
+            <div class="help-title">
+                <h2>Bạn cần chúng tôi giúp đỡ?</h2>
+            </div>
+            <div class="help-description">
+                <p>
+                    Mô tả thông tin có giá trị,
+                    những điểm nổi bật, 
+                    lời giới thiệu hấp dẫn về
+                    <br> 
+                    sản phẩm dịch vụ.
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <div class="help-hour">
+                Hỗ trợ khách hàng 24/7
+            </div>
+            <div class="help-phone">
+                <i class="ti-mobile"></i>
+                <h3>0399626478</h3>
+            </div>
+        </div>
+
+        <button class="help-button" type="button">LIÊN HỆ</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div>
+            <div class="address-title">
+                <h4>Địa chỉ văn phòng</h4>
+            </div>
+            <div class="address-infor">
+                <p>
+                    Số 2, Võ Oanh, Phường 25,
+                    Bình Thạnh, TP Hồ Chí Minh,
+                    Việt Nam
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <div class="infor-title">
+                <h4>Theo dõi để nhận các thông tin, ưu đãi mới nhất</h4>
+            </div>
+            <div class="infor-icon">
+                <a href="https://www.facebook.com/quangthinh2803/"><i class="ti-facebook"></i></a>
+                <a href="#"><i class="ti-instagram"></i></a>
+                <a href="#"><i class="ti-google"></i></a>
+                <a href="#"><i class="ti-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-title">
+            <h4>Cái Shop Nước Hoa - Since 2024</h4>
+        </div>
+    </div>
+</div>
+</body>
+</html>

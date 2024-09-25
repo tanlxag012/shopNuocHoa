@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/assets/fonts/themify-icons/themify-icons.css">
+    <link rel="icon" href="/public/assets/img/perfume.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/assets/style/delivery.css">
+    <title>Thanh toán</title>
+</head>
+<body>
+<!-- HEADER -->
+<div class="header">
+    <div class="slogan">
+        <h1 class="first">Cái Shop nước hoa</h1>
+        <h1>Bạn thích tôi mới bán</h1>
+    </div>
+    <div class="cart">
+        <a href=""><i class="ti-shopping-cart"></i></a>
+    </div>
+</div>
+
+<!-- PAYMENT -->
+<div class="pay">
+    <form class="customer-infor col-half">
+        <div class="contact">
+<!--            <div class="head">-->
+<!--                <h2>Liên hệ</h2>-->
+<!--                <a href="./index.html">Đăng nhập</a>-->
+<!--            </div>-->
+
+            <div class="input">
+                <input id="email" class="col-full" type="email" placeholder="Email" required>
+            </div>
+        </div>
+
+        <div class="delivery">
+            <div class="head">
+                <h2>Giao hàng</h2>
+            </div>
+
+            <div class="country">
+                <p>Quốc gia/Vùng</p>
+                <h4>Việt Nam</h4>
+            </div>
+
+            <div class="name">
+                <input class="first-name col-half" type="text" placeholder="Tên" required>
+                <input class="last-name col-half" type="text" placeholder="Họ" required>
+            </div>
+
+            <input class="address col-full" type="text" placeholder="Địa chỉ" required>
+
+            <div class="city">
+                <input class="city-name col-half" type="text" placeholder="Thành phố" required>
+<!--                <input class="post-code col-half" type="text" placeholder="Mã bưu chính" required>-->
+            </div>
+
+            <input class="phone col-full" type="tel" placeholder="Điện thoại" required>
+
+            <div class="save">
+                <input id="check" type="checkbox">
+                <label for="check"><p>Lưu lại thông tin cho lần sau</p></label>
+            </div>
+        </div>
+
+        <div class="delivery-method">
+            <h2>Phương thức vận chuyển</h2>
+            <div class="method">
+                <p>Tiêu chuẩn</p>
+                <h4>Miễn phí</h4>
+            </div>
+        </div>
+
+        <div class="payment">
+            <h2>Thanh toán</h2>
+            <button onclick="purchase()" type="submit" class="button col-full">Hoàn tất đơn hàng</button>
+        </div>
+    </form>
+
+    <div class="product col-half">
+        <div id="fetched-content">
+
+        </div>
+
+        <div class="delivery">
+            <p>Vận chuyển</p>
+            <p>MIỄN PHÍ</p>
+        </div>
+
+        <div class="delivery">
+            <input id="quantity" style="border:none;width:100%;outline: none;" type="number" min = 1 >
+        </div>
+
+        <div class="total">
+            <h2>Tổng</h2>
+            <div class="total-cost">
+                <h5 style="font-size:24px" id="total"></h5>
+                <div id="fetched-content2" valu>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Hàm để lấy nội dung từ trang nguồn
+    let productPrice;
+    const totalElement = document.getElementById('total');
+    document.getElementById("quantity").addEventListener("change",function(e) {
+    totalElement.innerText =  e.target.value * productPrice;
+})
+    async function fetchContent1() {
+        try {
+            const perfumeId = window.location.href[window.location.href.length-1];
+<!--            const response = await fetch('/product/`${perfumeId}`');  // Gửi yêu cầu lấy nội dung của 'source.html'-->
+<!--            const text = await response.text();  // Chuyển phản hồi thành văn bản-->
+<!--            const parser = new DOMParser();  // Tạo một DOMParser để phân tích cú pháp HTML-->
+<!--            const doc = parser.parseFromString(text, 'text/html');  // Phân tích cú pháp văn bản HTML nhận được-->
+<!--            const content = doc.querySelector('#content').innerHTML;  // Lấy nội dung của phần tử có id 'content'-->
+                fetch("/api/auth/perfumes/" + perfumeId)
+                    .then(json => json.json())
+                    .then(data => {
+                        document.getElementById('fetched-content').innerHTML = data.name;
+                        productPrice = data.price;
+                })
+
+             // Chèn nội dung vào phần tử với id 'fetched-content'
+
+<!--            const imageElement = doc.querySelector('#source-image');  // Lấy phần tử hình ảnh từ trang nguồn-->
+<!--            if (imageElement) {-->
+<!--                const newImageElement = document.createElement('img');  // Tạo một phần tử img mới-->
+<!--                newImageElement.src = imageElement.src;  // Đặt src của hình ảnh mới bằng src của hình ảnh từ trang nguồn-->
+<!--                newImageElement.alt = imageElement.alt;  // Đặt alt của hình ảnh mới bằng alt của hình ảnh từ trang nguồn-->
+<!--                document.getElementById('fetched-content').appendChild(newImageElement);  // Thêm hình ảnh mới vào phần tử fetched-content-->
+<!--            }-->
+<!--            // Xử lý hình ảnh-->
+        } catch (error) {
+            console.error('Error fetching content:', error);  // Xử lý lỗi nếu có
+        }
+    }
+
+    // Hàm để lấy nội dung từ trang nguồn
+    async function fetchContent2() {
+        try {
+            const response = await fetch('perfume1.html');  // Gửi yêu cầu lấy nội dung của 'source.html'
+            const text = await response.text();  // Chuyển phản hồi thành văn bản
+            const parser = new DOMParser();  // Tạo một DOMParser để phân tích cú pháp HTML
+            const doc = parser.parseFromString(text, 'text/html');  // Phân tích cú pháp văn bản HTML nhận được
+            const content = doc.querySelector('#perfume-cost').innerHTML;  // Lấy nội dung của phần tử có id 'content'
+
+            document.getElementById('fetched-content2').innerHTML = content;  // Chèn nội dung vào phần tử với id 'fetched-content2'
+
+        } catch (error) {
+            console.error('Error fetching content:', error);  // Xử lý lỗi nếu có
+        }
+    }
+
+    fetch('/api/auth/getEmail')
+    .then(res=>res.text())
+    .then(data=>{
+        document.getElementById("email").value = data
+    })
+
+    // Gọi cả hai hàm khi trang được tải
+    window.addEventListener('load', fetchContent1);
+    window.addEventListener('load', fetchContent2);
+
+    const purchase = () => {
+        const payload = {
+        email: document.getElementById("email").value,
+        firstName: document.querySelector('.first-name').value,
+        lastName: document.querySelector('.last-name').value,
+        address: document.querySelector('.address').value,
+        city: document.querySelector('.city-name').value,
+        phoneNumber: document.querySelector('.phone').value,
+        perfume: document.getElementById("fetched-content").innerText,
+        quantity: document.getElementById("quantity").value,
+        total: document.getElementById('total').innerText
+    }
+
+        fetch("/checkouts/purchase",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        })
+    }
+
+</script>
+
+</body>
+</html>

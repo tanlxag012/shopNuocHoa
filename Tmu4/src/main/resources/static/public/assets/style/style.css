@@ -1,0 +1,548 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Header - CSS */
+.background {
+    width: 100%;
+    height: 835px;
+    opacity: 0.9;
+    position: relative;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+
+.header-slogan {
+    font-family: Lobster, cursive;
+    font-size: 15px;
+    line-height: 1;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.second-slogan {
+    color: rgb(31, 33, 41);
+}
+
+.header-icon {
+    align-self: center;
+    display: flex;
+}
+
+.header-icon i{
+    display: inline-block;
+    font-size: 24px;
+    padding: 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.header-icon i {
+    color: white;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.face-icon i:hover {
+    transform: scale(1.5);
+    color: #38b6ff;
+}
+
+.insta-icon i:hover {
+    transform: scale(1.5);
+    color: #a03939;
+}
+
+.google-icon i:hover {
+    transform: scale(1.5);
+    color: #ffdf6e;
+}
+
+/* Main - CSS */
+.main {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    top: 124px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    background-color: rgb(0, 2, 2, 0.5);
+    border-radius: 10px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.main-intro .logo img {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    margin-bottom: 16px;
+    margin-left: 8px;
+}
+
+.main-intro .name,
+.main-intro .main-text {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin-bottom: 32px;
+}
+
+.main-login {
+    width: 40%;
+    height: auto;
+    background-color: aliceblue;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-login .login-header {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    text-align: center;
+    padding: 32px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.main-login .login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-login .login-form,
+.main-login .form-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-login .input-email,
+.main-login .input-password {
+    width: 90%;
+    align-self: center;
+    border: solid #ccc 1px;
+    border-radius: 3px;
+    padding: 16px;
+    margin-top: 16px;
+    margin-bottom: 4px;
+}
+
+.main-login .submit {
+    display: inline-block;
+    transition: all 0.2s ease-in;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    color: #090909;
+    padding: 0.7em 1.7em;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    width: 90%;
+    align-self: center;
+    margin-top: 16px;
+}
+  
+.main-login .submit:active {
+    color: #666;
+    box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+}
+  
+.main-login .submit:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+  
+.main-login .submit:after {
+    content: "";
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    background-color: #009087;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+  
+.main-login .submit:hover {
+    color: #ffffff;
+    border: 1px solid #009087;
+}
+  
+.main-login .submit:hover:before {
+    top: -35%;
+    background-color: #009087;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+  
+.main-login .submit:hover:after {
+    top: -45%;
+    background-color: #009087;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.main-login .login-footer p {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.main-login .login-footer a {
+    text-decoration: none;
+    color: rgba(32, 189, 204);
+} 
+
+/* Sale - CSS */
+.sale {
+    position: absolute;
+    top: 600px;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    border: solid white 12px;
+    color: white;
+    /* text-shadow: 1px 1px 3px black; */
+    margin-bottom: 32px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.sale .intro-header {
+    font-size: 20px;
+    font-family: Lobster, cursive;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.sale .intro-main {
+    font-size: 32px;
+}
+
+.sale .intro-main,
+.sale .intro-footer {
+    margin-bottom: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.sale .intro-footer {
+    font-size: 20px;
+}
+
+/* Products - CSS */
+.products {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px;
+}
+
+.products .products-intro {
+    margin-bottom: 46px;
+    margin-top: 64px;
+    width: 100%;
+    text-align: center;
+}
+
+.products .intro {
+    display: flex;
+    justify-content: center;
+}
+
+.products .intro-line {
+    align-self: center;
+    margin-left: 8px;
+    margin-right: 8px;
+    width: 35%;
+    border-bottom: solid 2px #b3a4a4;
+}
+
+.products .intro-header,
+.products .intro-description {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #665f5f;
+}
+
+.products .intro-description {
+    margin-top: 16px;
+    color: black;
+}
+
+.products .products-img {
+    display: flex;
+    justify-content: center;
+}
+
+.products .products-1 img, 
+.products .products-2 img {
+    width: 300px;
+    height: 385px;
+    padding: 16px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.products .products-1 img:hover, 
+.products .products-2 img:hover,
+.products .products-34 img:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.products .products-34 {
+    display: flex;
+    flex-direction: column;
+    order: 2;
+    justify-content: space-between;
+}
+
+.products .products-34 img {
+    width: 300px;
+    height: 194px;
+    padding: 16px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.products .products-1 {
+    order: 1;
+}
+
+.products .products-2 {
+    order: 3;
+}
+
+/* Vote - CSS */
+.vote .vote-background{
+    background-image: url('https://w.ladicdn.com/uploads/images/6b3d1f5c-573c-443c-b29c-44a06ce8e3e8.jpg');   
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: rgb(255, 252, 252);
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 1px 1px 1px black;
+    text-align: center;
+}
+
+.vote .vote-rate {
+    display: flex;
+    margin-top: 16px;
+    margin-bottom: 64px;
+    font-size: 18px;
+}
+
+.vote .vote-rate i {
+    color: #ffdf6e;
+}
+
+.vote .vote-person img {
+    width: 125px;
+    height: 125px;
+    border: solid 5px white;
+    border-radius: 125%;
+    box-shadow: 1px 1px 1px black;
+    margin-bottom: 48px;
+    margin-top: 100px;
+}
+
+.vote .vote-comment {
+    margin-left: 215px;
+    margin-right: 215px;
+    line-height: 1.4;
+    font-style: italic;
+    margin-bottom: 36px;
+}
+
+.vote .vote-personInfor {
+    border-bottom: solid 1px white;
+    width: 20%;
+    margin-bottom: 64px;
+}
+
+.vote-personInfor .name {
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.vote-personInfor .job {
+    font-size: 12px;
+    margin-bottom: 48px;
+}
+
+/* TRADEMARK - CSS */
+.trademark {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: solid 2px #ccc;
+    margin-top: 4px;
+}
+
+.trademark img {
+    padding-top: 74px;
+    padding-bottom: 74px;
+    width: 125px;
+    height: auto;
+}
+
+/* HELP - CSS */
+.help {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #665f5f;
+    background-color: #f3f1f1;
+}
+
+.help .help-title {
+    padding-top: 64px;
+    padding-bottom: 12px;
+}
+
+.help .help-description {
+    font-style: italic;
+    padding-bottom: 64px;
+}
+
+.help .help-phone {
+    display: flex;
+    padding-top: 12px;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.help .help-phone i {
+    font-weight: 800;
+    padding-right: 4px;
+}
+
+.help .help-button {
+    width: 120px;
+    height: 42px;
+    border: solid 2px #665f5f;
+    color: #665f5f;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.help .help-button:hover {
+    opacity: 0.8;
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+
+.help .help-button:active {
+    transform: scale(0.97);
+}
+
+/* FOOTER - CSS */
+.footer {
+    width: 100%;
+    height: auto;
+    background-color: #1f2129;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #8e8f93;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    padding-bottom: 100px;
+}
+
+.footer .address-title,
+.footer .infor-title {
+    padding-top: 64px;
+    padding-bottom: 12px;
+    font-size: 20px;
+}
+
+.footer .address-infor {
+    color: white;
+}
+
+.footer .infor-icon {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer .infor-icon a {
+    text-decoration: none;
+}
+
+.footer .infor-icon a {
+    font-size: 23px;
+    color: white;
+    padding: 12px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.footer .infor-icon a:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+.footer .infor-icon .ti-facebook:hover {
+    color: #38b6ff;
+}
+
+.footer .infor-icon .ti-instagram:hover {
+    color: #a03939;
+}
+
+.footer .infor-icon .ti-google:hover {
+    color: #ffdf6e;
+}
+
+.footer .infor-icon .ti-youtube:hover {
+    color: #e80909;
+}
+
+.footer .footer-title {
+    text-align: center;
+    width: 90%;
+    padding-top: 12px;
+    position: absolute;
+    bottom: 16px;
+    border-top: solid 1px #747474;
+}

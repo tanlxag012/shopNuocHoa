@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/assets/fonts/themify-icons/themify-icons.css">
+    <link rel="icon" href="/public/assets/img/perfume.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/assets/style/delivery.css">
+    <title>Thanh toán</title>
+</head>
+<body>
+<!-- HEADER -->
+<div class="header">
+    <div class="slogan">
+        <h1 class="first">Cái Shop nước hoa</h1>
+        <h1>Bạn thích tôi mới bán</h1>
+    </div>
+</div>
+
+<!-- PAYMENT -->
+<div class="customer">
+    <h2>Thông tin đơn hàng</h2>
+</div>
+
+<!--<div class="pay">-->
+<!--    <form class="customer-infor col-half">-->
+<!--        <div class="contact">-->
+<!--            <h2 class="head">Email</h2>-->
+
+<!--            <div class="input">-->
+<!--                <input class="input col-full" type="email" placeholder="Email" required>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="delivery">-->
+<!--            <div class="head">-->
+<!--                <h2>Thông tin</h2>-->
+<!--            </div>-->
+
+<!--            <div class="country">-->
+<!--                <p>Quốc gia/Vùng</p>-->
+<!--                <h4>Việt Nam</h4>-->
+<!--            </div>-->
+
+<!--            <div class="name">-->
+<!--                <input class="first-name col-half" type="text" placeholder="Tên" required>-->
+<!--                <input class="last-name col-half" type="text" placeholder="Họ" required>-->
+<!--            </div>-->
+
+<!--            <input class="address col-full" type="text" placeholder="Địa chỉ" required>-->
+
+<!--            <div class="city">-->
+<!--                <input class="city-name col-full" type="text" placeholder="Thành phố" required>-->
+<!--            </div>-->
+
+<!--            <input class="phone col-full" type="tel" placeholder="Điện thoại" required>-->
+
+<!--        </div>-->
+<!--    </form>-->
+
+<!--    <div class="product col-half">-->
+<!--        <div>-->
+<!--            <p id="perfume-name">name</p>-->
+<!--        </div>-->
+
+<!--        <div class="quantity">-->
+<!--            <p>Số lượng</p>-->
+<!--            <p id="quan"></p>-->
+<!--        </div>-->
+
+<!--        <div class="total">-->
+<!--            <h2>Tổng</h2>-->
+<!--            <div class="total-cost">-->
+<!--                <h5>VND</h5>-->
+<!--                <div>-->
+<!--                    <h3 id="perfume-cost">100000đ</h3>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+</body>
+<script>
+    fetch("/api/auth/getAllInvoice")
+        .then(res => res.json())
+        .then(list => {
+            list.forEach(item => {
+                const tempDiv = document.createElement('div');
+
+                tempDiv.innerHTML =
+                 `<div class="pay">
+    <form class="customer-infor col-half">
+        <div class="contact">
+            <h2 class="head">Email</h2>
+
+            <div class="input">
+                <p class="input col-full">Email: ${item.email}</p>
+            </div>
+        </div>
+
+        <div class="delivery">
+            <div class="head">
+                <h2>Thông tin</h2>
+            </div>
+
+            <div class="country">
+                <p>Quốc gia/Vùng</p>
+                <h4>Việt Nam</h4>
+            </div>
+
+            <div class="name">
+                <p class="first-name col-half">Tên: ${item.firstName}</p>
+                <p class="last-name col-half">Họ: ${item.lastName}</p>
+            </div>
+
+            <p class="address col-full">Địa chỉ: ${item.address}</p>
+
+            <div class="city">
+                <p class="city-name col-full">Thành phố: ${item.city}</p>
+            </div>
+
+            <p class="phone col-full">SĐT: ${item.phoneNumber}</p>
+
+        </div>
+    </form>
+
+    <div class="product col-half">
+        <div>
+            <p id="perfume-name">Tên sản phảm: ${item.perfume}</p>
+        </div>
+
+        <div class="quantity">
+            <p id="quan">Số lượng: ${item.quantity}</p>
+        </div>
+
+        <div class="total">
+
+            <div class="total-cost">
+                <div>
+                    <h3 id="perfume-cost">Tổng: ${item.total}VNĐ</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`
+document.body.appendChild(tempDiv.firstElementChild);
+            })
+
+        })
+</script>
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/assets/style/signup.css">
+    <link rel="stylesheet" href="/public/assets/fonts/themify-icons/themify-icons.css">
+    <link rel="icon" href="/public/assets/img/perfume.png" type="image/x-icon">
+    <title>Đăng kí</title>
+
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <div class="slogan">
+        <h1>Cái Shop nước Hoa</h1>
+        <h1>Bạn thích tôi mới bán</h1>
+    </div>
+</div>
+
+<!-- Signup -->
+<div class="signup">
+    <div class="signup-title">
+        <h2>SIGN UP</h2>
+    </div>
+
+    <form class="signup-form" action="/api/auth/signup" method="post">
+        <div class="signup-name">
+            <p>Tên của bạn</p>
+            <input type="text" name="username" placeholder="Nhập tên của bạn" required id="">
+        </div>
+        <div class="signup-email">
+            <p>Email của bạn</p>
+            <input type="email" name="email" placeholder="Nhập email của bạn" required id="">
+            <p style="color:blue;" th:text="${message}"></p>
+
+        </div>
+        <div class="signup-pass">
+            <p>Mật khẩu của bạn</p>
+            <input type="password" name="password" placeholder="Nhập mật khẩu của bạn" required id="">
+        </div>
+        <button class="button">ĐĂNG KÍ</button>
+    </form>
+
+    <div class="signup-footer">
+        <p>Bạn đã có tài khoản?</p>
+        <a href="./index.html">
+            <button class="button">ĐĂNG NHẬP</button>
+        </a>
+    </div>
+
+    <div class="signup-other">
+        <div class="title">
+            <p>OR</p>
+        </div>
+        <div class="icon">
+            <i class="ti-facebook"></i>
+            <i class="ti-google"></i>
+            <i class="ti-instagram"></i>
+        </div>
+    </div>
+</div>
+</body>
+</html>
