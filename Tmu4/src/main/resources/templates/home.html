@@ -13,7 +13,8 @@
 <div class="header" id="home">
     <!-- Thanh tìm kiếm -->
     <div class="header-search">
-        <input class="search-input" type="text" placeholder="Tìm kiếm sản phẩm...">
+        <input id="search-input" type="text" placeholder="Tìm kiếm sản phẩm...">
+        <div id="suggestions"></div>
         <i class="search-icon ti-search"></i>
     </div>
 
@@ -40,9 +41,9 @@
     </div>
 
     <!-- Cart -->
-    <div class="header-cart">
-        <i class="icon ti-shopping-cart"></i>
-    </div>
+<!--    <div class="header-cart">-->
+<!--        <i class="icon ti-shopping-cart"></i>-->
+<!--    </div>-->
 </div>
 
 <!-- STICKY BAR -->
@@ -186,6 +187,11 @@
             <p>LIÊN HỆ</p>
         </a>
     </li>
+    <li class="list contact">
+        <a class="link" href="/api/auth/gio-hang">
+            <p>Giỏ hàng</p>
+        </a>
+    </li>
 
 </div>
 
@@ -247,6 +253,17 @@
     });
 
     showSlide(index);
+
+    fetch('/api/auth/getUsername')
+   .then(res => res.text())
+    .then(data => {
+       if(typeof data === "string" && data.length !== 0){
+           document.querySelector('.Hello')
+               .childNodes[1].innerText = 'Xin chào, ' + data;
+           document.querySelector('.login').remove();
+       }
+
+   })
 </script>
 
 <!-- PRODUCTS -->
@@ -845,7 +862,48 @@
         <h4>CÁI SHOP NƯỚC HOA - SINCE 2024</h4>
     </div>
 </div>
+<script>
+    let debounceTimeout;
 
+    // Hàm debounce để trì hoãn việc gọi API
+    function debounce(func, delay) {
+        return function(...args) {
+            clearTimeout(debounceTimeout);  // Xóa bộ đếm thời gian trước đó
+            debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    // Hàm để gọi API tìm kiếm
+    function searchProducts(keyword) {
+        if (keyword.length > 2) {  // Chỉ bắt đầu gợi ý khi nhập hơn 2 ký tự
+            // Gửi yêu cầu AJAX đến server
+            fetch(`/api/auth/suggest/${keyword}`)
+                .then(response => response.json())
+                .then(data => {
+                    let suggestionsDiv = document.getElementById("suggestions");
+                    suggestionsDiv.innerHTML = "";  // Xóa các gợi ý cũ
+
+                    // Nếu có kết quả, tạo danh sách gợi ý
+                    data.forEach(product => {
+                        let productLink = document.createElement("a");
+                        productLink.href = `/product/${product.id}`;
+                        productLink.innerText = product.name;
+                        productLink.style.padding = "8px 20px";
+                        suggestionsDiv.appendChild(productLink);
+                        suggestionsDiv.appendChild(document.createElement("br"));
+                    });
+                });
+        } else {
+            document.getElementById("suggestions").innerHTML = "";  // Xóa gợi ý nếu không có đủ ký tự
+        }
+    }
+
+    // Sử dụng debounce cho sự kiện nhập liệu trong thanh tìm kiếm
+    document.getElementById("search-input").addEventListener("input", debounce(function() {
+        let keyword = this.value;
+        searchProducts(keyword);  // Gọi hàm tìm kiếm với từ khóa
+    }, 300));  // Đặt thời gian trễ là 300ms
+</script>
 </body>
 
 

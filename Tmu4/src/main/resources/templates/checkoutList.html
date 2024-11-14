@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/assets/fonts/themify-icons/themify-icons.css">
+    <link rel="icon" href="/public/assets/img/perfume.png" type="image/x-icon">
+    <link rel="stylesheet" href="/public/assets/style/delivery.css">
+    <title>Thanh toán</title>
+</head>
+<body>
+<!-- HEADER -->
+<div class="header">
+    <div class="slogan">
+        <h1 class="first">Cái Shop nước hoa</h1>
+        <h1>Bạn thích tôi mới bán</h1>
+    </div>
+    <div class="cart">
+        <a href=""><i class="ti-shopping-cart"></i></a>
+    </div>
+</div>
+
+<!-- PAYMENT -->
+<div class="pay">
+    <form class="customer-infor col-half">
+        <div class="contact">
+            <!--            <div class="head">-->
+            <!--                <h2>Liên hệ</h2>-->
+            <!--                <a href="./index.html">Đăng nhập</a>-->
+            <!--            </div>-->
+
+            <div class="input">
+                <input id="email" class="col-full" type="email" placeholder="Email" required>
+            </div>
+        </div>
+
+        <div class="delivery">
+            <div class="head">
+                <h2>Giao hàng</h2>
+            </div>
+
+            <div class="country">
+                <p>Quốc gia/Vùng</p>
+                <h4>Việt Nam</h4>
+            </div>
+
+            <div class="name">
+                <input class="first-name col-half" type="text" placeholder="Tên" required>
+                <input class="last-name col-half" type="text" placeholder="Họ" required>
+            </div>
+
+            <input class="address col-full" type="text" placeholder="Địa chỉ" required>
+
+            <div class="city">
+                <select class="city-name col-half" type="text" placeholder="Thành phố" required></select>
+                <!--                <input class="post-code col-half" type="text" placeholder="Mã bưu chính" required>-->
+            </div>
+
+            <input class="phone col-full" type="tel" placeholder="Điện thoại" required>
+
+            <div class="save">
+                <input id="check" type="checkbox">
+                <label for="check"><p>Lưu lại thông tin cho lần sau</p></label>
+            </div>
+        </div>
+
+        <div class="delivery-method">
+            <h2>Phương thức vận chuyển</h2>
+            <div class="method">
+                <p>Tiêu chuẩn</p>
+                <h4>Miễn phí</h4>
+            </div>
+        </div>
+
+        <div class="payment">
+            <h2>Thanh toán</h2>
+            <button onclick="purchase()" type="submit" class="button col-full">Hoàn tất đơn hàng</button>
+        </div>
+    </form>
+
+    <div class="product col-half">
+        <div id="fetched-content">
+
+        </div>
+
+        <div class="delivery">
+            <p>Vận chuyển</p>
+            <p>MIỄN PHÍ</p>
+        </div>
+
+        <div class="total">
+            <h2>Tổng</h2>
+            <div class="total-cost">
+                <h5 style="font-size:24px" id="total"></h5>
+                <div id="fetched-content2" valu>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+
+    </style>
+</div>
+
+<script>
+    const e = document.querySelector(".city-name.col-half");
+
+   fetch('https://esgoo.net/api-tinhthanh/1/0.htm')
+.then(json => json.json())
+.then(provinces => {
+   provinces.data.forEach(province => {
+       const el = document.createElement('option');
+       el.value = province.name;
+       el.innerText = province.name;
+       e.appendChild(el);
+   })
+})
+   function updateTotal(){
+       let total = 0;
+       JSON.parse(localStorage.getItem('cart')).forEach(item => {
+           total += item.cost.replace("đ","")  * item.quantity;
+       })
+       document.querySelector(".total-cost").innerText = total.toLocaleString('vi-VN') + " đ";
+   }
+   updateTotal();
+
+   fetch('/api/auth/getEmail')
+   .then(res=>res.text())
+   .then(data=>{
+       document.getElementById("email").value = data
+   })
+
+
+   const itemsSection =  document.querySelector(".product.col-half");
+   JSON.parse(localStorage.getItem('cart')).forEach(item => {
+   const newItem = document.createElement('div');
+   newItem.style.margin = "12px 0";
+   const itemName = document.createElement('div');
+   const itemCost = document.createElement('div');
+   const itemQuantity = document.createElement('input');
+   const delBtn = document.createElement('button');
+   delBtn.innerText = "X";
+   delBtn.name = item.name;
+   delBtn.onclick = function(){
+       let check = confirm("Xóa sản phẩm " + delBtn.name);
+       if(check){
+           let cart = JSON.parse(localStorage.getItem('cart'));
+       cart =  cart.filter(item => item.name !== delBtn.name);
+       localStorage.setItem('cart', JSON.stringify(cart));
+       document.getElementById(delBtn.name).remove();
+       updateTotal();
+       }
+
+   };
+
+   delBtn.style.padding = "6px";
+   delBtn.style.marginLeft = "12px";
+   itemQuantity.type = "number";
+   itemQuantity.min = 0;
+   itemQuantity.style.padding = "6px 6px";
+
+   itemName.innerText = item.name;
+   itemCost.innerText = item.cost.toLocaleString('vi-VN') ;
+   itemQuantity.value = item.quantity;
+   itemQuantity.name = item.name;
+   itemQuantity.className = "inputQuantity";
+   newItem.appendChild(itemName);
+   newItem.appendChild(itemCost);
+   newItem.appendChild(itemQuantity);
+   newItem.appendChild(delBtn);
+   newItem.id = item.name;
+   itemsSection.prepend(newItem);
+})
+
+   const inputElements = document.querySelectorAll(".inputQuantity");
+   inputElements.forEach(function(element) {
+   element.addEventListener('change', function(e) {
+       let cart = JSON.parse(localStorage.getItem('cart'));
+       let item = cart.find(item => item.name === e.currentTarget.name);
+       item.quantity = e.currentTarget.value;
+       localStorage.setItem('cart', JSON.stringify(cart));
+       updateTotal();
+   });
+});
+
+
+const purchase = () => {
+   JSON.parse(localStorage.getItem('cart')).forEach(item => {
+       const payload = {
+           email: document.getElementById("email").value,
+           firstName: document.querySelector('.first-name').value,
+           lastName: document.querySelector('.last-name').value,
+           address: document.querySelector('.address').value,
+           city: document.querySelector('.city-name').value,
+           phoneNumber: document.querySelector('.phone').value,
+           perfume: item.name,
+           quantity: item.quantity,
+           total: item.cost.replace("đ","")
+       }
+       try {
+           fetch("/checkouts/purchase",{
+           method: "POST",
+           headers: {
+               "Content-Type": "application/json"
+           },
+           body: JSON.stringify(payload)
+       })
+
+
+
+
+       }catch{
+            confirm("Có lỗi xảy ra. Xin thử lại sau");
+       }
+
+
+   })
+   localStorage.removeItem('cart');
+document.querySelector(".pay").remove();
+            setTimeout(function(){
+                const flag = confirm("Đặt hàng thành công. Trở về trang Home ?");
+                if(flag){
+                    location.href = "/api/auth/home";
+                }
+            },200);
+   }
+
+</script>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.shopNuocHoa.Tmu4.models.checkout;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shopNuocHoa.Tmu4.models.perfume.Perfume;
 import com.shopNuocHoa.Tmu4.models.user.User;
 import jakarta.persistence.*;
@@ -19,12 +20,13 @@ public class CheckOut {
     private String city;
     private String phoneNumber;
     private String perfume;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "perfume_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "", referencedColumnName = "id")
     private Perfume perfumeId;
     private String quantity;
     private String total;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 }

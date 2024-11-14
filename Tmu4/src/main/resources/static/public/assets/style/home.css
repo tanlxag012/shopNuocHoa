@@ -25,9 +25,18 @@
     border-radius: 5px;
     display: flex;
     align-items: center;
+    position: relative;
+}
+#suggestions{
+    position:absolute;
+    width: 300px;
+    background-color: pink;
+    top:50px;
+    left:0;
+    z-index: 10000;
 }
 
-.header-search .search-input {
+.header-search #search-input {
     border: none;
     padding: 8px;
     margin-left: 5px;

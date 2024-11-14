@@ -11,9 +11,9 @@ import com.shopNuocHoa.Tmu4.repository.PerfumeRepository;
 import com.shopNuocHoa.Tmu4.repository.PerfumeTypeRepository;
 import com.shopNuocHoa.Tmu4.security.service.UserDetailsImpl;
 import com.shopNuocHoa.Tmu4.service.AuthService;
-import com.shopNuocHoa.Tmu4.service.EmailService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,6 +87,11 @@ public class AuthController {
     public List<CheckOut> getAllInvoice(){
         return checkoutRepository.findAll();
     }
+    @GetMapping("/suggest/{name}")
+    @ResponseBody
+    public List<Perfume> searchProducts(@PathVariable String name){
+        return perfumeRepository.searchProductsIgnoreCase(name);
+    }
     @GetMapping("/getEmail")
     @ResponseBody
     public String getCurrentUserEmail() {
@@ -98,9 +103,29 @@ public class AuthController {
             return null;
         }
     }
+    @GetMapping("/getUsername")
+    @ResponseBody
+    public String getCurrentUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetailsImpl) {
+            return ((UserDetailsImpl) principal).getUsername();
+        } else {
+            return null;
+        }
+    }
+    @GetMapping("/example")
+    @ResponseBody
+    public ResponseEntity<String> getExample() {
+        return ResponseEntity.noContent().build(); // Trả về 204 No Content
+    }
     @GetMapping("/perfumeType")
     @ResponseBody
     public List<PerfumeType> perfumeTypeList(){
         return typeRepository.findAll();
+    }
+
+    @GetMapping("/gio-hang")
+    public String gioHang(){
+        return "checkoutList";
     }
 }

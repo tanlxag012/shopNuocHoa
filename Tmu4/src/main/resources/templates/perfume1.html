@@ -186,6 +186,11 @@
             <p>LIÊN HỆ</p>
         </a>
     </li>
+    <li class="list contact">
+        <a class="link" href="/api/auth/gio-hang">
+            <p>Giỏ hàng</p>
+        </a>
+    </li>
 </div>
 
 <!-- BREADCRUMB -->
@@ -242,7 +247,7 @@
 
     <div class="buy-button">
         <a id="buy-button" href=""><button class="button">MUA NGAY</button></a>
-        <a href=""><button class="button">THÊM VÀO GIỎ HÀNG</button></a>
+        <a id="addToCart" ><button class="button">THÊM VÀO GIỎ HÀNG</button></a>
     </div>
 </div>
 
@@ -412,6 +417,39 @@
 
     const buyBtn = document.getElementById("buy-button");
     buyBtn.href = "/checkouts/" + perfumeId;
+
+    document.getElementById('addToCart').addEventListener('click',()=>{
+    // Lấy dữ liệu giỏ hàng từ localStorage hoặc khởi tạo nếu chưa có
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Tìm xem sản phẩm đã có trong giỏ hàng chưa
+  let product = cart.find(item => item.name === document.querySelector('.name').innerText);
+
+  if (product) {
+    // Nếu sản phẩm đã có, tăng số lượng
+    product.quantity += 1;
+  } else {
+    // Nếu sản phẩm chưa có, thêm sản phẩm mới vào giỏ hàng
+    cart.push({
+    name: document.querySelector('.name').innerText,
+    cost: document.querySelector('.cost').innerText,
+    quantity: 1 });
+  }
+
+  // Lưu lại giỏ hàng vào localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert(`Đã thêm ${document.querySelector('.name').innerText} vào giỏ hàng!`);
+})
+    fetch('/api/auth/getUsername')
+   .then(res => res.text())
+    .then(data => {
+       if(typeof data === "string" && data.length !== 0){
+           document.querySelector('.Hello')
+               .childNodes[1].innerText = 'Xin chào, ' + data;
+           document.querySelector('.login').remove();
+       }
+
+   })
 </script>
 </body>
 </html>

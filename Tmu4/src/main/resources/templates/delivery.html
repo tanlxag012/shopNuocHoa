@@ -52,7 +52,9 @@
             <input class="address col-full" type="text" placeholder="Địa chỉ" required>
 
             <div class="city">
-                <input class="city-name col-half" type="text" placeholder="Thành phố" required>
+                <select class="city-name col-half" type="text" placeholder="Thành phố" required>
+
+                </select>
 <!--                <input class="post-code col-half" type="text" placeholder="Mã bưu chính" required>-->
             </div>
 
@@ -104,6 +106,18 @@
 </div>
 
 <script>
+    const e = document.querySelector(".city-name.col-half");
+
+    fetch('https://esgoo.net/api-tinhthanh/1/0.htm')
+.then(json => json.json())
+.then(provinces => {
+    provinces.data.forEach(province => {
+        const el = document.createElement('option');
+        el.value = province.name;
+        el.innerText = province.name;
+        e.appendChild(el);
+    })
+})
     // Hàm để lấy nội dung từ trang nguồn
     let productPrice;
     const totalElement = document.getElementById('total');

@@ -133,10 +133,15 @@ body {
 }
 
 .city {
-    padding: 12px;
     border: none;
     border-radius: 5px;
 }
+.city-name{
+                padding: 12px;
+    border: none;
+    border-radius: 5px;
+
+        }
 
 .phone {
     padding: 12px;
